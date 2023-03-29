@@ -49,9 +49,10 @@ class CharacterRpgTest {
 
         var nurse = new CharacterRpg();
 
+
         //when
         character.attack(victim ,  2L);
-        nurse.heals(victim, 50L);
+        victim.heals(victim, 50L);
 
         //then
         assertEquals( true , victim.getAlive());
@@ -75,5 +76,38 @@ class CharacterRpgTest {
 
 
     }
+    @Test
+    void CharacterCanOnlyHealItSelf(){
+        //given
+        var character = new CharacterRpg();
+        var nurse = new CharacterRpg();
+        var victim = new CharacterRpg();
+        var victim2 = new CharacterRpg();
+        //when
+        character.attack(victim, 100);
+        character.attack(victim2, 100);
+        nurse.heals(victim2, 100L);
+        victim.heals(victim, 100L);
+        //then
+        assertEquals( 900, victim2.getHealth());
+        assertEquals( 1000, victim.getHealth());
+    }
 
+    @Test
+    void characterDeals50PerCentDamageIfTargetIs5OrMoreLevelsAboveAttacker(){
+        var character = new CharacterRpg();
+        var superCharacter = new CharacterRpg(12);
+
+        var victim = new CharacterRpg();
+        var victim2 = new CharacterRpg(7);
+
+        //when
+        character.attack(victim2, 100);
+        superCharacter.attack(victim, 100);
+        //then
+
+        assertEquals(950, victim2.getHealth());
+        assertEquals(850, victim.getHealth());
+
+    }
 }
