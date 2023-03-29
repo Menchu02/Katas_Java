@@ -26,7 +26,11 @@ public class CharacterRpg {
     }
 
     public void attack(CharacterRpg victim, long damage) {
+        if(victim==this){
+            victim.damage(0L);
+            return;
 
+        }
         victim.damage(damage);
     }
 

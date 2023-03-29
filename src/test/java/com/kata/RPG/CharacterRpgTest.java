@@ -62,5 +62,18 @@ class CharacterRpgTest {
 
 
     }
+    @Test
+    void aCharacterCannotDealDamageToItSelf(){
+        //given
+        var character = new CharacterRpg();
+        var victim = new CharacterRpg();
+        //when
+        victim.attack(victim, 2L);
+        //then
+        assertEquals(1000, victim.getHealth());
+
+
+
+    }
 
 }
