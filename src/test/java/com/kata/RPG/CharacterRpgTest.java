@@ -27,4 +27,40 @@ class CharacterRpgTest {
 
 
     }
+    @Test
+
+    void charactersCanDealDamageToCharacters(){
+        //given
+        var character = new CharacterRpg();
+        var victim = new CharacterRpg();
+        //when
+        character.attack(victim ,  1000L);
+
+        //then
+        assertEquals( 0, victim.getHealth());
+        assertEquals( false, victim.getAlive() );
+    }
+    @Test
+
+     void aCharacterCanHealACharacter(){
+        //given
+        var character = new CharacterRpg();
+        var victim = new CharacterRpg();
+
+        var nurse = new CharacterRpg();
+
+        //when
+        character.attack(victim ,  2L);
+        nurse.heals(victim, 50L);
+
+        //then
+        assertEquals( true , victim.getAlive());
+        assertEquals(1000, victim.getHealth());
+
+
+
+
+
+    }
+
 }
